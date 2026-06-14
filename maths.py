@@ -81,3 +81,23 @@ def ft_std(values: tuple) -> float:
 
 	std = math.sqrt(ft_var(values))
 	return std
+
+def ft_eta_squared(groups: dict) -> float:
+
+	all_values = []
+	for values in groups.values():
+		all_values.extend(values)
+	
+	total_mean = ft_mean(all_values)
+
+	ss_total = 0
+	ss_between = 0
+
+	for values in groups.values():
+
+		ss_total += sum((x - total_mean) ** 2 for x in values)
+
+		house_mean = ft_mean(values)
+		ss_between += ft_count(values) * (house_mean - total_mean) ** 2
+
+	return ss_between / ss_total

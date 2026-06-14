@@ -54,13 +54,18 @@ def main() -> None:
 
 	args = parse_args()
 	
-	path = csv_check(args.dataset)
-	data = pd.read_csv(path)
-	numeric_data = data.select_dtypes(include="number")
+	try:
 
-	stats = get_stats_dataset(numeric_data)
+		path = csv_check(args.dataset)
+		data = pd.read_csv(path)
+		numeric_data = data.select_dtypes(include="number")
 
-	print(stats)
+		stats = get_stats_dataset(numeric_data)
+
+		print(stats)
+
+	except Exception as e:
+		print(f"Error : {e}")
 	
 	return None
 
